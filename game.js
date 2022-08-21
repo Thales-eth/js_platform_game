@@ -11,7 +11,9 @@ const Game = {
 
     player: undefined,
     platforms: [],
-    background: undefined,
+    backgrounds: [],
+    backgroundImg: 'images/background.png',
+    hillsImage: 'images/hills.png',
 
     interval: undefined,
 
@@ -55,11 +57,12 @@ const Game = {
         this.platforms.push(new Platform(this.ctx, 200, this.height / 2))
         this.platforms.push(new Platform(this.ctx, 700, this.height / 1.2))
         this.platforms.push(new Platform(this.ctx, 1000, this.height / 1.6))
-        this.background = new Background(this.ctx)
+        this.backgrounds.push(new Background(this.ctx, this.backgroundImg))
+        this.backgrounds.push(new Background(this.ctx, this.hillsImage))
     },
 
     drawAll() {
-        this.background.draw()
+        this.backgrounds.forEach(background => background.draw())
         this.player.update()
         this.platforms.forEach(platform => {
             platform.draw()
