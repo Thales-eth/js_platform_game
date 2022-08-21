@@ -1,8 +1,9 @@
 class Background {
-    constructor(ctx, image) {
+    constructor(ctx, image, parallax) {
         this.ctx = ctx
         this.posX = -1
         this.posY = -1
+        this.parallax = parallax
 
         this.image = new Image()
         this.image.src = image

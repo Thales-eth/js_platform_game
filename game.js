@@ -57,12 +57,20 @@ const Game = {
         this.platforms.push(new Platform(this.ctx, 200, this.height / 2))
         this.platforms.push(new Platform(this.ctx, 700, this.height / 1.2))
         this.platforms.push(new Platform(this.ctx, 1000, this.height / 1.6))
-        this.backgrounds.push(new Background(this.ctx, this.backgroundImg))
-        this.backgrounds.push(new Background(this.ctx, this.hillsImage))
+        this.backgrounds.push(new Background(this.ctx, this.backgroundImg, 0))
+        this.backgrounds.push(new Background(this.ctx, this.hillsImage, 10))
     },
 
     drawAll() {
-        this.backgrounds.forEach(background => background.draw())
+        this.backgrounds.forEach(background => {
+            background.draw()
+            if (this.player.rightKeyPressed) {
+                background.posX -= background.parallax
+            }
+            if (this.player.leftKeyPressed) {
+                background.posX += background.parallax
+            }
+        })
         this.player.update()
         this.platforms.forEach(platform => {
             platform.draw()

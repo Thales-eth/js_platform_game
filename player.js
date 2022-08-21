@@ -47,7 +47,7 @@ class Player {
         if (this.leftKeyPressed && this.position.x > 20) {
             this.moveLeft()
         }
-        else if (this.rightKeyPressed && this.position.x + this.width < this.ctxWidth - 20) {
+        else if (this.rightKeyPressed && this.position.x <= this.ctxWidth / 2.5) {
             this.moveRight()
         }
         else {
@@ -95,11 +95,11 @@ class Player {
     }
 
     moveLeft() {
-        this.velocity.x = -15
+        this.velocity.x = -10
     }
 
     moveRight() {
-        this.velocity.x = 15
+        this.velocity.x = 10
     }
 
     moveUp() {
