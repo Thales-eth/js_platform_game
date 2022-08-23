@@ -6,6 +6,8 @@ class Background {
         this.parallax = parallax
 
         this.image = new Image()
+
+
         this.image.src = image
 
         this.width = this.image.width

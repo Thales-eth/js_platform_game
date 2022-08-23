@@ -4,11 +4,12 @@ class Player {
         this.ctxHeigth = ctxHeigth
         this.ctxWidth = ctxWidth
         this.floor = floor
+        this.canJump = false
 
         this.gravity = 0.5
 
         this.position = {
-            x: 100,
+            x: 210,
             y: 100
         }
         this.velocity = {
@@ -37,10 +38,8 @@ class Player {
 
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
-        if (this.position.y + this.height + this.velocity.y < this.ctxHeigth) this.velocity.y += this.gravity
-        else {
-            this.velocity.y = 0
-        }
+
+        this.velocity.y += this.gravity
 
         this.setEventListeners()
 
@@ -95,14 +94,15 @@ class Player {
     }
 
     moveLeft() {
-        this.velocity.x = -10
+        this.velocity.x = -12
     }
 
     moveRight() {
-        this.velocity.x = 10
+        this.velocity.x = 12
     }
 
     moveUp() {
-        if (this.position.y > this.ctxHeigth / 1.5) this.velocity.y = -15
+        if (this.canJump) this.velocity.y = -15
+        this.canJump = false
     }
 }

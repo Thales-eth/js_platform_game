@@ -1,1 +1,1 @@
-# js_platform_game
+**This is a pure JS OOP Canvas Game**

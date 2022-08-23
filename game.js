@@ -6,6 +6,9 @@ const Game = {
     height: undefined,
     floor: 50,
     scrollOffset: 0,
+    time: 0,
+    secs: 0,
+    timer: undefined,
 
     FPS: 60,
 
@@ -19,6 +22,7 @@ const Game = {
 
 
     init() {
+        this.timer = document.querySelector('span')
         this.canvas = document.querySelector('#canvas')
         this.ctx = canvas.getContext('2d')
         this.setDimensions()
@@ -38,9 +42,16 @@ const Game = {
 
         this.interval = setInterval(() => {
 
+            this.time++
+            if (this.time % 60 === 0) {
+                this.secs++
+                this.timer.innerText = this.secs
+            }
+
             this.clearAll()
             this.drawAll()
             this.checkCollision()
+            this.checkDeath()
             this.checkWin()
 
         }, 1000 / this.FPS)
@@ -93,17 +104,23 @@ const Game = {
                 && this.player.position.x + this.player.width > platform.position.x
                 && this.player.position.x < platform.position.x + platform.width) {
                 this.player.velocity.y = 0
+                this.player.canJump = true
             }
         })
 
     },
 
+    checkDeath() {
+        if (this.player.position.y - 20 >= this.canvas.height) {
+            clearInterval(this.interval)
+            location.reload()
+        }
+    },
+
     checkWin() {
         if (this.scrollOffset >= 1000) {
-            setTimeout(() => {
-                location.reload()
-            }, 1000)
             alert('YOU WON')
+            location.reload()
         }
     }
 }
